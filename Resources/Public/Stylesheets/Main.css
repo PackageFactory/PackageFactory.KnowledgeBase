@@ -1,0 +1,2004 @@
+/*!
+* Stylesheets for https://github.com/PackageFactory/PackageFactory.KnowledgeBase - Built on: 2015-04-25 
+* 
+* @package packagefactory-knowledgebase
+* @author Wilhelm Behncke <wilhelm.behncke@googlemail.com>
+*/
+
+/*
+SASS Functions, Mixins and Variables
+
+Styleguide 1
+*/
+/*
+Functions
+
+Styleguide 1.1
+*/
+/*
+Image-Url($imagePath)
+
+Returns the path of an Image asset.
+
+<!= type: css || isPureCode !>
+
+Markup:
+.selector {
+	background-image: image-url("logo.png");
+}
+
+Styleguide 1.1.1
+*/
+/*
+Relative Size($target-size, $context, $unit)
+
+Calculates em's based on pixel values.
+
+<!= type: css || isPureCode !>
+
+Markup:
+.selector {
+	font-size: rs(19, 16);
+}
+
+Styleguide 1.1.2
+*/
+/*
+Color-Adjust($color, $contrast)
+
+Adjusts a color based on the lightness which is passed as a second parameter, this function was written by @necolas(https://github.com/necolas/).
+
+<!= type: css || isPureCode !>
+
+Markup:
+.selector {
+	background: color-adjust(#0097d7, 100%);
+}
+
+// Styleguide 1.1.3
+*/
+/*
+Map-Fetch($map, $keys)
+
+Navigates through nested Sass maps, this function was written by @jlong(https://github.com/jlong/)
+
+<!= type: css || isPureCode !>
+
+Markup:
+@each $key, $value in map-get($headings, elements) {
+	.selector {
+	 	font-size: map-fetch($headings, elements $key font-size) +px;
+	}
+}
+
+Styleguide 1.1.4
+*/
+/*
+Map-RemoveKeys($map, $keys)
+
+Removes multiple keys in a Sass map.
+
+<!= type: css || isPureCode !>
+
+Markup:
+$newDecalarationsMap: map-removeKeys($declarations, font-size margin-bottom);
+
+Styleguide 1.1.5
+*/
+/*
+generateModifierComments($map, $keys)
+
+Generate the modifier class comments for kss-node from a Sass map.
+
+Markup:
+generateModifierComments($brand-colors, " brand color.")
+*/
+/*
+Mixins
+
+Styleguide 1.2
+*/
+/*
+High density Image-Dimensions Mixin($fileName, $width, $height)
+
+Creates the required rules for high density optimized images.
+
+<!= type: css || isPureCode !>
+
+Markup:
+.selector {
+	@include hdpi-img('brand-logo.png');
+}
+
+Styleguide 1.2.1
+*/
+/*
+REM Unit Mixin($property, $value)
+
+Creates a property independent 'rem' calculation with a pixel fallback, default property is set to 'font-size'.
+
+<!= type: css || isPureCode !>
+
+Markup:
+.selector {
+	@include rem($property: font-size, $value: 18);
+}
+
+Styleguide 1.2.2
+*/
+/*
+Font-Size Mixin($font-size, $appendVrythm)
+
+Creates a fully formed type style (sizing and vertical rhythm) by passing in a single value.
+
+<!= type: css || isPureCode !>
+
+Markup:
+.selector {
+	@include rem($size: 16, $appendVrythm: true);
+}
+
+Styleguide 1.2.3
+*/
+/*
+CSS Triangle Mixin($triangleSize, $triangleColor, $triangleDirection)
+
+Creates an css arrow as per http://cssarrowplease.com/.
+
+<!= type: css || isPureCode !>
+
+Markup:
+.selector:after {
+	position: absolute;
+	top: -5px;
+	left: 50%;
+	margin-left: -2.5px;
+	@include cssTriangle(5px, #fff, bottom);
+}
+
+Styleguide 1.2.4
+*/
+/*
+Media-Query SASS Mixins($target-size, $context, $unit)
+
+Wraps rules around the desired media query context.
+
+<!= type: css || isPureCode !>
+
+Markup:
+@include min-screen(width) {}             - shortcut for @media screen and (min-width ...)
+@include max-screen(width) {}             - shortcut for @media screen and (max-width ...)
+@include screen(min-width, max-width) {}  - shortcut for @media screen and (min-width ...) and (max-width ...)
+@include hdpi {}                          - devices with high-density screens
+
+Styleguide 1.2.6
+*/
+/*
+Generic rules
+
+Resets and other generic stuff.
+*/
+/*
+Head
+
+Declarations which should be put at the top of the document e.g. @font-face declarations and CSS viewports.
+*/
+/*
+Global border-box
+@docs http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+*/
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/*
+Normalize
+
+A cut-down version of normalize.css
+@author Nicolas Gallagher
+@link http://necolas.github.com/normalize.css/
+*/
+/*
+Normalize HTML5 display definitions
+*/
+/**
+ * Corrects `block` display not defined in IE6/7/8/9 & FF3.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+main,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * Corrects `inline-block` display not defined in IE 8/9.
+ */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+}
+
+/**
+ * Addresses styling for `hidden` attribute not present in IE7/8/9, FF3, S4.
+ * Known issue: no IE6 support.
+ */
+[hidden] {
+  display: none;
+}
+
+/*
+Normalize Base
+*/
+/**
+ * 1. Prevents iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ * 2. Forces vertical scrollbar to prevent jumpy page
+ */
+html {
+  -webkit-text-size-adjust: 100%;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 1 */
+  overflow-y: scroll;
+  /* 2 */
+}
+
+/*
+Normalize Forms
+*/
+/**
+ * 1. Corrects font size not being inherited in all browsers.
+ * 2. Addresses margins set differently in IE6/7, FF3+, S5, Chrome.
+ * 3. Improves appearance and consistency in all browsers.
+ */
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  vertical-align: baseline;
+  /* 3 */
+}
+
+/**
+ * Re-apply the `font-weight` to avoid modifying the default UX, and because
+ * the default cannot be changed in Chrome and Safari on OS X.
+ */
+optgroup {
+  font-weight: bold;
+}
+
+/**
+ * Addresses FF3/4 setting `line-height` on `input` using `!important` in the
+ * UA stylesheet.
+ */
+button,
+input {
+  line-height: normal;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Corrects inability to style clickable `input` types in iOS.
+ * 3. Improves usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * 1. Addresses box sizing set to content-box in IE8/9.
+ * 2. Removes excess padding in IE8/9.
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * 1. Addresses `appearance` set to `searchfield` in S5, Chrome.
+ * 2. Addresses `box-sizing` set to `border-box` in S5, Chrome (include `-moz`
+ *    to future-proof).
+ */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  box-sizing: content-box;
+  /* 2 */
+}
+
+/**
+ * Removes inner padding and search cancel button in S5, Chrome on OS X.
+ */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Removes inner padding and border in FF3+.
+ */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/*
+Base wrapper elements
+
+High-level wrapper elements.
+*/
+body {
+  /**
+   * Remove default margin.
+   */
+  margin: 0;
+  font: 400 100%/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: left;
+  color: #3C474B;
+  background: #fff;
+}
+
+.siteWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 60em;
+  position: relative;
+}
+
+/*
+TYPO3
+
+Styling for typo3 related classes
+*/
+/*
+CSC-Frames
+*/
+.csc-frame-rulerBefore:before {
+  content: '';
+}
+
+.csc-frame-rulerAfter:after {
+  content: '';
+}
+
+.csc-frame-indent {
+  padding: 0 10%;
+}
+
+.csc-frame-indent3366 {
+  padding-left: 33.333%;
+}
+
+.csc-frame-indent6633 {
+  padding-right: 33.333%;
+}
+
+/*
+Utilities
+
+Utilitie classes which can be used independently from each other to create simple stylings.
+
+Styleguide 2
+*/
+/*
+Brand styles
+
+Helper classes for brand related stylings.
+
+Styleguide 2.5
+*/
+/*
+Brand text styles
+
+Markup:
+<span class="u-brand">I am an paragraph.</span>
+
+Styleguide 2.5.1
+*/
+.u-brand {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #0097d7;
+}
+
+/*
+Brand color helpers
+ .u-brandColor-primary - primary brand color.
+
+Markup:
+<span class="{$modifiers}">Brand color helpers.</span>
+
+Styleguide 2.5.2
+*/
+.u-brandColor-primary {
+  color: #0097d7;
+}
+
+/*
+Brand font-family helper
+
+Markup:
+<span class="u-brandFace">This text will be set in the brands font-family.</span>
+
+Styleguide 2.5.3
+*/
+.u-brandFace {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*
+Brand logos
+
+Markup:
+<img class="u-brandLogo" alt="Brand name" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="  />
+
+Styleguide 2.5.4
+*/
+.u-brandLogo {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  background: url(../Images/brandLogo.png);
+}
+
+/*
+Display utilities
+
+Styleguide 2.2
+*/
+/*
+Visibillity helpers
+
+.u-block - Display the target as an block element.
+.u-hidden - Hide from both screenreaders and browsers: http://www.h5bp.com/u
+.u-invisible - Hide visually and from screenreaders, but maintain layout.
+
+Markup:
+<div class="{$modifiers}">This element won't be visible.</div>
+
+Styleguide 2.2.1
+*/
+.u-block {
+  display: block !important;
+}
+
+.u-hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+.u-invisible {
+  visibility: hidden;
+}
+
+/*
+Layout utilities
+
+Styleguide 2.1
+*/
+/*
+Float helpers
+
+.u-floatRight - Floats the element to the right boundary.
+.u-floatLeft - Floats the element to the left boundary.
+
+Markup:
+<span class="{$modifiers}">I am an paragraph.</span>
+
+Styleguide 2.1.1
+*/
+.u-floatRight {
+  float: right;
+}
+
+.u-floatLeft {
+  float: left;
+}
+
+/*
+Float clearfix
+
+Contain floats: http://www.h5bp.com/q
+
+Markup:
+<div class="u-cf">This element will clear any floats inside of it.</div>
+
+Styleguide 2.1.2
+*/
+.u-cf:before,
+.dl--horizontal:before,
+.g:before,
+.grid:before,
+.u-cf:after,
+.dl--horizontal:after,
+.g:after,
+.grid:after,
+.u-clearfix:before,
+.u-clearfix:after {
+  content: "";
+  display: table;
+}
+.u-cf:after,
+.dl--horizontal:after,
+.g:after,
+.grid:after,
+.u-clearfix:after {
+  clear: both;
+}
+
+/*
+Spacing utilities
+
+Margin and padding helper classes. Use these to tweak layout on a micro level.
+
+Styleguide 2.4
+*/
+/*
+Margin utilities
+
+.u-m0  - Resets the margin.
+.u-mt0 - Resets the top margin.
+.u-mr0 - Resets the right margin.
+.u-ml0 - Resets the left margin.
+.u-mb0 - Resets the bottom margin.
+.u-m   - Adds a basic margin.
+.u-mt  - Adds a basic margin on the top.
+.u-mr  - Adds a basic margin on the right.
+.u-ml  - Adds a basic margin on the left.
+.u-mb  - Adds a basic margin on the bottom.
+.u-m0-5   - Adds a half sized margin.
+.u-mt0-5  - Adds a half sized margin on the top.
+.u-mr0-5  - Adds a half sized margin on the right.
+.u-ml0-5  - Adds a half sized margin on the left.
+.u-mb0-5  - Adds a half sized margin on the bottom.
+
+Markup:
+<p class="{$modifiers}">I am an paragraph.</p>
+
+Styleguide 2.4.1
+*/
+p, menu,
+ol,
+ul, dl, pre, blockquote, .csc-frame-rulerBefore:before, .csc-frame-rulerAfter:after,
+hr,
+.u-m0 {
+  margin: 0;
+}
+
+.u-mt0 {
+  margin-top: 0;
+}
+
+.u-mr0 {
+  margin-right: 0;
+}
+
+.u-ml0 {
+  margin-left: 0;
+}
+
+.u-mb0 {
+  margin-bottom: 0;
+}
+
+.u-m {
+  margin: 24px;
+  margin: 1.5rem;
+}
+
+.u-mt {
+  margin-top: 24px;
+  margin-top: 1.5rem;
+}
+
+.u-mr {
+  margin-right: 24px;
+  margin-right: 1.5rem;
+}
+
+.u-ml {
+  margin-left: 24px;
+  margin-left: 1.5rem;
+}
+
+p, menu,
+ol,
+ul, dl, legend, pre, blockquote, .csc-frame-rulerBefore:before, .csc-frame-rulerAfter:after,
+hr, iframe, video, audio,
+.table, form,
+.u-mb {
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+}
+
+.u-m0-5 {
+  margin: 12px;
+  margin: 0.75rem;
+}
+
+.u-mt0-5 {
+  margin-top: 12px;
+  margin-top: 0.75rem;
+}
+
+.u-mr0-5 {
+  margin-right: 12px;
+  margin-right: 0.75rem;
+}
+
+.u-ml0-5 {
+  margin-left: 12px;
+  margin-left: 0.75rem;
+}
+
+.u-mb0-5 {
+  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
+}
+
+/*
+Padding utilities
+
+.u-p0  - Resets the padding.
+.u-pt0 - Resets the top padding.
+.u-pr0 - Resets the right padding.
+.u-pl0 - Resets the left padding.
+.u-pb0 - Resets the bottom padding.
+.u-p   - Adds a basic padding.
+.u-pt  - Adds a basic padding on the top.
+.u-pr  - Adds a basic padding on the right.
+.u-pl  - Adds a basic padding on the left.
+.u-pb  - Adds a basic padding on the bottom.
+.u-p0-5   - Adds a half sized padding.
+.u-pt0-5  - Adds a half sized padding on the top.
+.u-pr0-5  - Adds a half sized padding on the right.
+.u-pl0-5  - Adds a half sized padding on the left.
+.u-pb0-5  - Adds a half sized padding on the bottom.
+
+Markup:
+<p class="{$modifiers}">I am an paragraph.</p>
+
+Styleguide 2.4.2
+*/
+.u-p0 {
+  padding: 0;
+}
+
+.u-pt0 {
+  padding-top: 0;
+}
+
+.u-pr0 {
+  padding-right: 0;
+}
+
+.u-pl0 {
+  padding-left: 0;
+}
+
+.u-pb0 {
+  padding-bottom: 0;
+}
+
+.u-p {
+  padding: 24px;
+  padding: 1.5rem;
+}
+
+.u-pt {
+  padding-top: 24px;
+  padding-top: 1.5rem;
+}
+
+.u-pr {
+  padding-right: 24px;
+  padding-right: 1.5rem;
+}
+
+.u-pl {
+  padding-left: 24px;
+  padding-left: 1.5rem;
+}
+
+.u-pb {
+  padding-bottom: 24px;
+  padding-bottom: 1.5rem;
+}
+
+.u-p0-5 {
+  padding: 12px;
+  padding: 0.75rem;
+}
+
+.u-pt0-5 {
+  padding-top: 12px;
+  padding-top: 0.75rem;
+}
+
+.u-pr0-5 {
+  padding-right: 12px;
+  padding-right: 0.75rem;
+}
+
+.u-pl0-5 {
+  padding-left: 12px;
+  padding-left: 0.75rem;
+}
+
+.u-pb0-5 {
+  padding-bottom: 12px;
+  padding-bottom: 0.75rem;
+}
+
+/*
+Typographic utilities
+
+Styleguide 2.3
+*/
+/*
+Text alignment
+
+.u-alignCenter - Centers the text.
+.u-alignRight - Aligns the text on it's right boundary.
+.u-alignLeft - Aligns the text on it's left boundary.
+
+Markup:
+<p class="{$modifiers}">I am an paragraph.</p>
+
+Styleguide 2.3.1
+*/
+.align-center,
+.u-alignCenter {
+  text-align: center;
+}
+
+.align-right,
+.u-alignRight {
+  text-align: right;
+}
+
+.align-left,
+.u-alignLeft {
+  text-align: left;
+}
+
+/*
+Other utilities
+
+.u-textBreak - Break strings when their length exceeds the width of their container.
+
+Markup:
+<p class="{$modifiers}">Extralongparagraphhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+
+Styleguide 2.3.2
+*/
+.dl--horizontal dt,
+.u-textBreak {
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+}
+
+/*
+Width classes
+
+Sizes which are used in conjunction with other objects and abstractions like the grid system.
+
+.u-w1/12 - One twelfth
+.u-w1/10 - One tenth
+.u-w1/8 - One eighth
+.u-w1/6 - One sixth
+.u-w2/12 - Two twelfths
+.u-w1/5 - One fifth
+.u-w2/10 - Two tenths
+.u-w1/4 - One quarter
+.u-w2/8 - Two eighths
+.u-w3/12 - Three twelfths
+.u-w3/10 - Three tenths
+.u-w1/3 - One third
+.u-w2/6 - Two sixths
+.u-w4/12 - Four twelfths
+.u-w3/8 - Three eighths
+.u-w2/5 - Two fifths
+.u-w4/10 - Four tenths
+.u-w5/12 - Five twelfths
+.u-w1/2 - One half
+.u-w2/4 - Two quarters
+.u-w3/6 - Three sixths
+.u-w4/8 - Four eighths
+.u-w5/10 - Five tenths
+.u-w6/12 - Six twelfths
+.u-w7/12 - Seven twelfths
+.u-w3/5 - Three fifths
+.u-w6/10 - Six tenths
+.u-w5/8 - Five eighths
+.u-w2/3 - Two thirds
+.u-w4/6 - Four sixths
+.u-w8/12 - Eight twelfths
+.u-w7/10 - Seven tenths
+.u-w3/4 - Three quarters
+.u-w6/8 - Six eighths
+.u-w9/12 - Nine twelfths
+.u-w4/5 - Four fifths
+.u-w8/10 - Eight tenths
+.u-w5/6 - Five sixths
+.u-w10/12 - Ten twelfths
+.u-w7/8 - Seven eighths
+.u-w9/10 - Nine tenths
+.u-w11/12 - Eleven twelfths
+.u-w1/1 - One whole
+
+Markup:
+<div class="{$modifiers}" style="padding: 10px; background: #eee;">.{$modifiers}</div>
+
+Styleguide 2.6
+*/
+/**
+* Whole
+*/
+.u-w1\/1 {
+  width: 100%;
+}
+
+/**
+* Halves
+*/
+.u-w1\/2, .u-w2\/4, .u-w3\/6, .u-w4\/8, .u-w5\/10, .u-w6\/12 {
+  width: 50%;
+}
+
+/**
+* Thirds
+*/
+.u-w1\/3, .u-w2\/6, .u-w4\/12 {
+  width: 33.333%;
+}
+
+.u-w2\/3, .u-w4\/6, .u-w8\/12 {
+  width: 66.666%;
+}
+
+/**
+* Quarters
+*/
+.u-w1\/4, .u-w2\/8, .u-w3\/12 {
+  width: 25%;
+}
+
+.u-w3\/4, .u-w6\/8, .u-w9\/12 {
+  width: 75%;
+}
+
+/**
+* Fifths
+*/
+.u-w1\/5, .u-w2\/10 {
+  width: 20%;
+}
+
+.u-w2\/5, .u-w4\/10 {
+  width: 40%;
+}
+
+.u-w3\/5, .u-w6\/10 {
+  width: 60%;
+}
+
+.u-w4\/5, .u-w8\/10 {
+  width: 80%;
+}
+
+/**
+* Sixths
+*/
+.u-w1\/6, .u-w2\/12 {
+  width: 16.666%;
+}
+
+.u-w5\/6, .u-w10\/12 {
+  width: 83.333%;
+}
+
+/**
+* Eighths
+*/
+.u-w1\/8 {
+  width: 12.5%;
+}
+
+.u-w3\/8 {
+  width: 37.5%;
+}
+
+.u-w5\/8 {
+  width: 62.5%;
+}
+
+.u-w7\/8 {
+  width: 87.5%;
+}
+
+/**
+* Tenths
+*/
+.u-w1\/10 {
+  width: 10%;
+}
+
+.u-w3\/10 {
+  width: 30%;
+}
+
+.u-w7\/10 {
+  width: 70%;
+}
+
+.u-w9\/10 {
+  width: 90%;
+}
+
+/**
+* Twelfths
+*/
+.u-w1\/12 {
+  width: 8.333%;
+}
+
+.u-w5\/12 {
+  width: 41.666%;
+}
+
+.u-w7\/12 {
+  width: 58.333%;
+}
+
+.u-w11\/12 {
+  width: 91.666%;
+}
+
+/*
+Atoms
+
+Atoms are basic tags, such as form labels, inputs or buttons.
+
+Styleguide 3
+*/
+/*
+Heading elements
+
+Basic styling for headings and sub-headings.
+
+Styleguide 3.1
+*/
+/*
+Headings
+
+Markup:
+<h1>I am an first-level heading</h1>
+<h2>I am an second-level heading</h2>
+<h3>I am an third-level heading</h3>
+<h4>I am an fourth-level heading</h4>
+<h5>I am an fifth-level heading</h5>
+<h6>I am an sixth-level heading</h6>
+
+Styleguide 3.1.1
+*/
+.h,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-weight: 700;
+  /**
+   * Optimized kerning for large font sizes
+   * use this only on large font-sizes (f.e. headings) to avoid performance issues.
+   */
+  text-rendering: optimizeLegibility;
+}
+
+/*
+Heading modifiers
+
+.h1 - Style the `<h#>`-element like a standard `<h1>`-element.
+.h2 - Style the `<h#>`-element like a standard `<h2>`-element.
+.h3 - Style the `<h#>`-element like a standard `<h3>`-element.
+.h4 - Style the `<h#>`-element like a standard `<h4>`-element.
+.h5 - Style the `<h#>`-element like a standard `<h5>`-element.
+.h6 - Style the `<h#>`-element like a standard `<h6>`-element.
+
+Markup:
+<h1 class="{$modifiers}">I am an first-level heading</h1>
+<h2 class="{$modifiers}">I am an second-level heading</h2>
+<h3 class="{$modifiers}">I am an third-level heading</h3>
+<h4 class="{$modifiers}">I am an fourth-level heading</h4>
+<h5 class="{$modifiers}">I am an fifth-level heading</h5>
+<h6 class="{$modifiers}">I am an sixth-level heading</h6>
+
+Styleguide 3.1.2
+*/
+.h1 {
+  font-size: 36px;
+}
+
+.h2 {
+  font-size: 30px;
+}
+
+.h3 {
+  font-size: 24px;
+}
+
+.h4 {
+  font-size: 20px;
+}
+
+.h5 {
+  font-size: 16px;
+}
+
+.h6 {
+  font-size: 16px;
+}
+
+/*
+Typographic elements
+
+Basic styling for all typographic related elements.
+
+Styleguide 3.2
+*/
+/*
+Base paragraph
+
+Markup:
+<p>I am an paragraph.</p>
+
+Styleguide 3.2.1
+*/
+/*
+Bold and strong elements
+
+Markup:
+<b>This text should be displayed in a bolder font-weight than the standard one.</b>
+
+Styleguide 3.2.2
+*/
+b,
+strong {
+  font-weight: 700;
+  /* Addresses style set to `bolder` in FF3+, S4/5, Chrome. */
+}
+
+/*
+Small text emphasis
+
+Markup:
+<small>This text should be smaller than the standard one.</small>
+
+Styleguide 3.2.3
+*/
+small {
+  font-size: 80%;
+}
+
+/*
+Abbreviation element
+
+Markup:
+<abbr title="The title of the abbreviation">This is an abbreviation.</abbr>
+
+Styleguide 3.2.4
+*/
+abbr[title] {
+  /* Addresses styling not present in IE7/8/9, S5, Chrome. */
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+/*
+Marked text emphasis element
+
+Markup:
+<mark>This text should be displayed in a special manner.</mark>
+
+Styleguide 3.2.5
+*/
+mark {
+  /* Addresses styling not present in IE6/7/8/9. */
+  background: #0097d7;
+  color: white;
+}
+
+/*
+Definition element
+
+Markup:
+<dfn>This text represents the defining instance of a term.</dfn>
+
+Styleguide 3.2.6
+*/
+dfn {
+  font-style: italic;
+  /* Addresses styling not present in S5, Chrome. */
+}
+
+/*
+Subscript Elements
+
+Markup:
+Regular text - <sup>this will be displayed higher and smaller than the main span of text.</sup><br>
+Regular text - <sub>this will be displayed lower and smaller than the main span of text.</sub>
+
+Styleguide 3.2.7
+*/
+sub,
+sup {
+  /* Prevents `sub` and `sup` affecting `line-height` in all browsers. gist.github.com/413930 */
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/*
+Text-Selection
+*/
+::-moz-selection,
+::-moz-selection {
+  background: #0097d7;
+  color: white;
+  text-shadow: none;
+}
+::-moz-selection,
+::selection {
+  background: #0097d7;
+  color: white;
+  text-shadow: none;
+}
+
+/*
+Anchors / Link elements
+
+Basic styling for anchor tags.
+
+Styleguide 3.3
+*/
+/*
+Standard anchors
+
+Markup:
+<a href="#" class="{$modifiers}">I am an anchor element.</a>
+
+:hover   - Hover styling for anchor elements.
+
+Styleguide 3.3.1
+*/
+a {
+  color: #0097d7;
+  text-decoration: none;
+  /**
+   * Remove the gray background color from active links in IE 10.
+   */
+  background: transparent;
+}
+a:hover, a:active, a:focus {
+  text-decoration: underline;
+}
+a:active, a:hover {
+  /**
+   * Improves readability when focused and also mouse hovered in all browsers.
+   */
+  outline: 0;
+}
+p a {
+  /**
+   * Increasing the Clickable Area of Inline Links inside a paragraph
+   */
+  margin: -.33em;
+  padding: .33em;
+  position: relative;
+}
+
+/*
+List elements
+
+Basic styling for lists and definition elements.
+
+Styleguide 3.5
+*/
+/*
+Unordered- & Ordered-Lists
+
+.reset-list - Resets the standard list styles of an `<ul>` or `<ol>` element.
+
+Markup:
+<ul class="{$modifiers}">
+	<li>Unordered-List</li>
+	<li>I am the first list-element.</li>
+	<li>I am the second list-element.</li>
+	<li>I am the third list-element.</li>
+	<li>I am the fourth list-element.</li>
+</ul>
+<ol class="{$modifiers}">
+	<li>Ordered-List</li>
+	<li>I am the first list-element.</li>
+	<li>I am the second list-element.</li>
+	<li>I am the third list-element.</li>
+	<li>I am the fourth list-element.</li>
+</ol>
+
+Styleguide 3.5.1
+*/
+menu,
+ol,
+ul {
+  padding: 0 0 0 2.5em;
+}
+
+li > ul,
+li > ol {
+  /**
+   * Remove vertical spacing from nested lists.
+   */
+  margin-bottom: 0;
+}
+
+/*
+Reset-List helper class
+*/
+.nav,
+.reset-list {
+  /**
+   *
+   */
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+/*
+Definitions.
+
+.dl--horizontal - Display a definition list in a horizontal order.
+
+Markup:
+<dl class="{$modifiers}">
+	<dt>Description lists</dt>
+	<dd>A description list is perfect for defining terms.</dd>
+	<dt>Euismod</dt>
+	<dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem.</dd>
+	<dd>Donec id elit non mi porta gravida at eget metus.</dd>
+	<dt>Malesuada porta</dt>
+	<dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+	<dt>Felis euismod semper eget lacinia</dt>
+	<dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+</dl>
+
+Styleguide 3.5.3
+*/
+/*
+Horizontal definition abstraction
+*/
+.dl--horizontal dt {
+  float: left;
+  width: 19%;
+  overflow: hidden;
+  clear: left;
+  text-align: right;
+}
+.dl--horizontal dd {
+  margin-left: 21%;
+}
+
+/*
+Form elements
+
+Basic styling for form element labels.
+
+Styleguide 3.6
+*/
+/*
+Labels
+
+Markup:
+<label>I am an label</label>
+
+Styleguide 3.6.1
+*/
+label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.71429;
+}
+label[for] {
+  cursor: pointer;
+}
+
+/*
+Legends
+
+Markup:
+<fieldset>
+	<legend>I am an fieldset legend.</legend>
+</fieldset>
+
+Styleguide 3.6.2
+*/
+legend {
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  font-size: 1.25rem;
+  border-bottom: 1px solid #cccccc;
+  padding: 0;
+}
+
+/*
+Form input elements
+
+Basic styling for form inputs.
+
+Styleguide 3.7
+*/
+/*
+Text inputs
+
+.textInput         - Basic styling for text input elements.
+.textInput:hover   - Hover styling for basic text input elements.
+.textInput:focus   - Focused styling for basic text input elements.
+
+Markup:
+<input type="text" class="{$modifiers}" /><br>
+<textarea class="{$modifiers}" cols="40"></textarea>
+
+Styleguide 3.7.1
+*/
+.textInput {
+  height: 24px;
+  padding: .2em .4em;
+  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
+  background: #fff;
+  border: 1px solid #cccccc;
+  border-radius: 1px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  font-size: 14px;
+  font-size: 0.875rem;
+  color: #475459;
+}
+
+textarea {
+  height: auto;
+  /* Reset height since textareas have the attribute rows="" */
+  min-height: 72px;
+  /* Set a min-height for textareas of 3 rows */
+  resize: vertical;
+  /* So users cannot expand the textarea over it's boundaries */
+  overflow: auto;
+  /* Removes default vertical scrollbar in IE6/7/8/9. */
+  vertical-align: top;
+  /* Improves readability and alignment in all browsers. */
+}
+
+input::-webkit-datetime-edit {
+  /**
+   * A possible shadow-dom fix for webkit control spacing on input[type=time]
+   */
+  margin-top: -.17em;
+  margin-bottom: -.17em;
+}
+
+/*
+Checkboxes / Radio buttons
+
+Markup:
+<label><input type="checkbox" /> I am an checkbox</label>
+<label><input type="radio" /> I am an radio button</label>
+
+Styleguide 3.7.2
+*/
+input[type="checkbox"],
+input[type="radio"] {
+  margin-right: .35em;
+  cursor: pointer;
+}
+
+/*
+Buttons
+
+Styleguide 3.8
+*/
+/*
+Button Object
+
+Disguise something as a button.
+
+.btn           - The basic button styles for all .btn's.
+.btn:hover     - Standard hover styling for buttons.
+.btn.btn--full - Set the button width to the width of it's parent element.
+
+Markup:
+<button class="{$modifiers}">Send button</button>
+<input type="button" class="{$modifiers}" value="Button" />
+<input type="reset" class="{$modifiers}" value="Reset" />
+<input type="submit" class="{$modifiers}" value="Submit" />
+<a class="{$modifiers}">An anchor element.</a>
+
+Styleguide 3.8.1
+*/
+.btn {
+  display: inline-block;
+  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
+  /**
+   * Set in em's so we can change the size of the button depending on the font-size.
+   */
+  padding: 0.5em 0.75em;
+  border: 0;
+  background: #0097d7;
+  border-radius: 1px;
+  cursor: pointer;
+  font-size: 0.8em;
+  /**
+   * Normalize some rules accross the targeted elements (<input>, <button> and the .btn class).
+   */
+  font-weight: normal;
+  line-height: 1;
+  color: white;
+  vertical-align: top;
+}
+.btn,
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn--full {
+  display: block;
+  text-align: center;
+  /**
+   * The following is so that this class works properly on inputs as well as anchor tags.
+   */
+  padding-right: 0;
+  padding-left: 0;
+  width: 100%;
+}
+
+/*
+Code & pre-formatted text elements
+
+Styleguide 3.12
+*/
+/*
+Default styles
+
+Markup:
+<code>.css{ color: red; }</code><br>
+<kbd>.css{ color: red; }</kbd><br>
+<samp>.css{ color: red; }</samp><br>
+<pre>.css{ color: red; }</pre>
+
+Styleguide 3.12.1
+*/
+code,
+kbd,
+pre,
+samp {
+  /**
+   * Corrects font family set oddly in Safari 5 and Chrome.
+   */
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 1em;
+}
+
+pre {
+  /**
+   * Improves readability of pre-formatted text in all browsers.
+   */
+  white-space: pre-wrap;
+}
+
+/*
+Quotes
+
+Styleguide 3.11
+*/
+/*
+Default Quote
+
+Markup:
+The following text <q>is an inline-quote</q>
+<blockquote>This text is a full quotation element</blockquote>
+
+Styleguide 3.11.1
+*/
+q {
+  /**
+   * Sets consistent quote types.
+   */
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+/*
+Rulers
+
+Styleguide 3.10
+*/
+/*
+The default horizontal ruler
+
+Markup:
+<hr>
+
+Styleguide 3.10.1
+*/
+.csc-frame-rulerBefore:before, .csc-frame-rulerAfter:after,
+hr {
+  /**
+  * Address differences between Firefox and other browsers.
+  */
+  box-sizing: content-box;
+  display: block;
+  height: 0;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  padding: 0;
+}
+
+/*
+Media
+
+Basic styling for media elements.
+*/
+/*
+Attachements & Images
+
+Contents: 1: Make Images & Attachements responsive
+					2: Styling the alt="" Text on images
+						 http://csswizardry.com/2011/06/styling-alt-text-on-images/
+					3: Removes border when inside `a` element in IE6/7/8/9, FF3.
+					4: Remove the gap between images and the bottom of their containers:
+						 h5bp.com/i/440
+					5: Decrease font-size on figcaption elements
+*/
+embed,
+iframe,
+object,
+img {
+  /* 1 */
+  max-width: 100%;
+}
+
+img {
+  font-style: italic;
+  /* 2 */
+  border: 0;
+  /* 3 */
+  vertical-align: middle;
+  /* 4 */
+}
+img[height] {
+  /* 1 */
+  height: auto;
+}
+
+figure {
+  /**
+   * Addresses margin not present in IE6/7/8/9, S5, O11.
+   */
+  margin: 1em 40px;
+}
+
+figcaption {
+  /* 5 */
+  font-size: 14px;
+  font-size: 0.875rem;
+}
+
+/*
+Multimedia elements
+*/
+audio {
+  min-width: 65%;
+}
+audio:not([controls]) {
+  /**
+   * Prevents modern browsers from displaying `audio` without controls.
+   */
+  display: none;
+  /**
+   * Remove excess height in iOS5 devices.
+   */
+  height: 0;
+}
+
+/*
+SVG element
+*/
+svg:not(:root) {
+  /**
+   * Corrects overflow displayed oddly in IE9.
+   */
+  overflow: hidden;
+}
+
+/*
+Tables
+
+Styleguide 3.9
+*/
+/*
+Table Object
+
+.table - Base class for all table-styles.
+.table.table--bordered - Extends the base '.table' class to an basic bordered table.
+.table.table--striped - Extends the base '.table' class to an clean table with borders below each row.
+.table.table--condensed - Extends the base '.table' class to an condensed table.
+.table.table--zebra - Extends the base '.table' class to an 'zebra'-styled table with odd & even changing background-colors.
+
+Markup:
+<table class="{$modifiers}">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Residence</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Max Mustermann</td>
+			<td>20</td>
+			<td>Berlin</td>
+		</tr>
+		<tr>
+			<td>Max Mustermann</td>
+			<td>20</td>
+			<td>Berlin</td>
+		</tr>
+		<tr>
+			<td>Max Mustermann</td>
+			<td>20</td>
+			<td>Berlin</td>
+		</tr>
+	</tbody>
+</table>
+
+Styleguide 3.9.1
+*/
+table {
+  max-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  vertical-align: bottom;
+}
+
+td {
+  vertical-align: top;
+}
+
+.table {
+  width: 100%;
+  margin-top: 0;
+}
+.table td,
+.table th {
+  padding: 0.5em;
+}
+
+.table--bordered {
+  border: 1px solid #cccccc;
+  border-collapse: separate;
+}
+.table--bordered td,
+.table--bordered th {
+  border-left: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+.table--bordered td:first-child,
+.table--bordered th:first-child {
+  border-left: 0;
+}
+.table--bordered tr:last-child > td {
+  border-bottom: 0;
+}
+
+.table--striped td,
+.table--striped th {
+  border-bottom: 1px solid #cccccc;
+}
+.table--striped th {
+  padding-top: 0;
+}
+
+.table--condensed td,
+.table--condensed th {
+  padding: 0.25em 0.5em 0.25em;
+}
+
+.table--zebra tbody tr:nth-child(even) {
+  background: #fff;
+}
+.table--zebra tbody tr:nth-child(odd) {
+  background: #f2f2f2;
+}
+
+/*
+Molecules
+
+Mlecules are groups of elements that function together as a unit. For example, a form label, search input, and button atom can combine them together to form a search form molecule.
+
+Styleguide 4
+*/
+/*
+Form
+
+Styleguide 4.3
+*/
+/*
+Form wrapper elements
+*/
+fieldset {
+  /**
+   * Reset border, margin, and padding to define a consistend style accross all browsers.
+   */
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Form-Inline abstraction
+
+.form--inline - Display a `<form>` and all it's content in a horizontal order.
+
+Markup:
+<form class="{$modifiers}">
+	<label>Username: </label>
+	<input class="textInput" type="text" placeholder="Username...">
+	<label>Password: </label>
+	<input class="textInput" type="password" placeholder="Password...">
+	<label class="label--checkbox">
+		<input type="checkbox">Remember me
+	</label>
+	<button type="submit" class="btn">Sign in</button>
+</form>
+
+Styleguide 4.3.1
+*/
+.form--inline label {
+  margin-right: .3em;
+}
+.form--inline .label--checkbox {
+  margin-right: 1em;
+}
+.form--inline .label--checkbox input {
+  margin-right: .35em;
+}
+.form--inline input {
+  margin-right: 1em;
+}
+.form--inline label,
+.form--inline button,
+.form--inline input,
+.form--inline select,
+.form--inline textarea {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+/*
+Navigations
+
+Styleguide 4.2
+*/
+/*
+Nav Object
+
+A modified version of the navigation object from inuit.css.
+
+.nav - Throws a list into horizontal mode.
+.nav.nav--stacked - Throws a list into vertical mode.
+.nav.nav--fit - Forces a list to occupy 100% of the available width of it's parent.
+
+Markup:
+<ul class="{$modifiers}">
+	<li><a href="">Home</a></li>
+	<li><a href="">About</a></li>
+	<li><a href="">Products</a></li>
+	<li><a href="">Contact</a></li>
+</ul>
+
+Styleguide 4.2.1
+*/
+.nav li {
+  display: inline-block;
+}
+.nav a {
+  display: block;
+}
+
+.nav--stacked li {
+  display: list-item;
+}
+
+.nav--fit {
+  display: table;
+  width: 100%;
+}
+.nav--fit > li {
+  display: table-cell;
+}
+
+/*
+Grids
+
+Styleguide 4.1
+*/
+/*
+Grid Object
+
+Grid object which makes use of the generated width classes.
+
+Markup:
+<div class="g">
+	<div class="gi u-w1/3">first collumn</div>
+	<div class="gi u-w1/3">second collumn</div>
+	<div class="gi u-w1/3">third collumn</div>
+</div>
+
+Styleguide 4.1.1
+*/
+.g,
+.grid {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.gi,
+.grid__item {
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/*
+Organisms
+
+Organisms are groups of molecules (and possibly atoms) joined together to form distinct section of an interface.
+*/
+/*
+Site Header
+*/
+/*
+Site Footer
+*/
+/*
+Templates
+*/
+/*
+Print
+
+Print styles - Inlined to avoid another HTTP connection.
+*/
+@media print {
+  * {
+    background: transparent !important;
+    /**
+     * Black prints faster: h5bp.com/s
+     */
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  @page {
+    margin: 0.5cm;
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    /**
+     * h5bp.com/t
+     */
+    display: table-header-group;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2, h3 {
+    page-break-after: avoid;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .print-hidden {
+    display: none;
+  }
+}
