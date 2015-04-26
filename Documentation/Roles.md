@@ -8,7 +8,7 @@ These roles apply to any kind of end user of the software.
 
 ### Administrator
 
-The Administrator manages a running instance of PackageFactory.Knowledgebase through its Web UI. Tis role can be considered to be partly technical, as we can suppose it to have experience with similar web application tooling.
+The Administrator manages a running instance of PackageFactory.Knowledgebase through its Web UI. This role can be considered to be partly technical, as we can suppose it to have experience with similar web application tooling.
 
 The Administrator also shares every other requirement with all other Instance Roles.
 
