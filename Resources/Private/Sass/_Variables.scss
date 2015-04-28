@@ -21,7 +21,8 @@ $direction:             ltr;
 // Your brand colors, for each of these keys, a class text-color helper-class will be generated.
 // f.e. `.u-brandColor-primary { color: #0097d7; }`
 $brand-colors: (
-	primary: #0097d7
+	primary: #0097d7,
+	background: #ffffff
 );
 
 // Your main brand font-family
@@ -75,7 +76,7 @@ $half-spacing:          $basic-spacing / 2;
 // =============================================================================
 // Basic layout width (in pixels) - will be set on the '.siteWrapper' class
 // The value is wrapped in the relative-size function which converts pixels into em's.
-$layout-width:          rs(960);
+$layout-width:          rs(1240);
 
 // Is this layout centered? If set to 'true' the '.siteWrapper' class will be centered.
 $centered-layout:       true;

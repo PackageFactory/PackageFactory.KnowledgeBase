@@ -10,7 +10,7 @@ body {
 	 * Remove default margin.
 	 */
 	margin: 0;
-
+	padding-top: 64px;
 	font: $base-font-weight #{$base-font-size/16*100}%/#{$base-line-height/$base-font-size} $base-font-family;
 	text-align: $start;
 	color: $base-text-color;

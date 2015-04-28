@@ -1,5 +1,5 @@
 /*!
-* Stylesheets for https://github.com/PackageFactory/PackageFactory.KnowledgeBase - Built on: 2015-04-25 
+* Stylesheets for https://github.com/PackageFactory/PackageFactory.KnowledgeBase - Built on: 2015-04-26 
 * 
 * @package packagefactory-knowledgebase
 * @author Wilhelm Behncke <wilhelm.behncke@googlemail.com>
@@ -382,6 +382,7 @@ body {
    * Remove default margin.
    */
   margin: 0;
+  padding-top: 64px;
   font: 400 100%/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: left;
   color: #3C474B;
@@ -391,36 +392,8 @@ body {
 .siteWrapper {
   margin-left: auto;
   margin-right: auto;
-  width: 60em;
+  width: 77.5em;
   position: relative;
-}
-
-/*
-TYPO3
-
-Styling for typo3 related classes
-*/
-/*
-CSC-Frames
-*/
-.csc-frame-rulerBefore:before {
-  content: '';
-}
-
-.csc-frame-rulerAfter:after {
-  content: '';
-}
-
-.csc-frame-indent {
-  padding: 0 10%;
-}
-
-.csc-frame-indent3366 {
-  padding-left: 33.333%;
-}
-
-.csc-frame-indent6633 {
-  padding-right: 33.333%;
 }
 
 /*
@@ -452,7 +425,7 @@ Styleguide 2.5.1
 
 /*
 Brand color helpers
- .u-brandColor-primary - primary brand color.
+ .u-brandColor-primary - primary brand color. .u-brandColor-background - background brand color.
 
 Markup:
 <span class="{$modifiers}">Brand color helpers.</span>
@@ -461,6 +434,10 @@ Styleguide 2.5.2
 */
 .u-brandColor-primary {
   color: #0097d7;
+}
+
+.u-brandColor-background {
+  color: #ffffff;
 }
 
 /*
@@ -608,7 +585,7 @@ Styleguide 2.4.1
 */
 p, menu,
 ol,
-ul, dl, pre, blockquote, .csc-frame-rulerBefore:before, .csc-frame-rulerAfter:after,
+ul, dl, pre, blockquote,
 hr,
 .u-m0 {
   margin: 0;
@@ -652,7 +629,7 @@ hr,
 
 p, menu,
 ol,
-ul, dl, legend, pre, blockquote, .csc-frame-rulerBefore:before, .csc-frame-rulerAfter:after,
+ul, dl, legend, pre, blockquote,
 hr, iframe, video, audio,
 .table, form,
 .u-mb {
@@ -796,17 +773,14 @@ Markup:
 
 Styleguide 2.3.1
 */
-.align-center,
 .u-alignCenter {
   text-align: center;
 }
 
-.align-right,
 .u-alignRight {
   text-align: right;
 }
 
-.align-left,
 .u-alignLeft {
   text-align: left;
 }
@@ -1594,7 +1568,6 @@ Markup:
 
 Styleguide 3.10.1
 */
-.csc-frame-rulerBefore:before, .csc-frame-rulerAfter:after,
 hr {
   /**
   * Address differences between Firefox and other browsers.
@@ -1682,6 +1655,16 @@ svg:not(:root) {
    * Corrects overflow displayed oddly in IE9.
    */
   overflow: hidden;
+}
+
+nav > ul, nav > ul > li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav > ul > li {
+  display: inline-block;
+  margin-left: 0.625em;
 }
 
 /*
@@ -1897,6 +1880,18 @@ Styleguide 4.2.1
   display: table-cell;
 }
 
+.userFunctions {
+  padding: 1.25em;
+}
+
+.brand {
+  margin-bottom: 1.25em;
+  display: block;
+}
+.brand img {
+  width: 100%;
+}
+
 /*
 Grids
 
@@ -1937,6 +1932,14 @@ Organisms are groups of molecules (and possibly atoms) joined together to form d
 /*
 Site Header
 */
+.siteHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+}
+
 /*
 Site Footer
 */

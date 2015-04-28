@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>PackageFactory - KnowledgeBase</title>
+		<f:base />
+
+		<link rel="stylesheet" href="{f:uri.resource(path:
+				'resource://PackageFactory.KnowledgeBase/Public/Stylesheets/Main.css')}">
+
+	</head>
+	<body class="siteWrapper">
+		<header class="siteHeader u-cf">
+			<div class="siteWrapper">
+				<nav class="userFunctions u-floatRight">
+					<ul class="userFunctions__list">
+						<li class="userFunctions__item">
+							<a href="#" class="userFunctions__link">Benutzerkonto erstellen</a>
+						</li>
+						<li class="userFunctions__item">
+							<a href="#" class="userFunctions__link">Anmelden</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<div class="g" data-app="test">
+			<nav class="sideBar gi u-w1/5">
+				<a href="#" class="brand">
+					<img src="http://placehold.it/200x200" alt="Logo">
+				</a>
+
+				<div class="mainFunctions">
+					<ul class="mainFunctions__list">
+						<li class="mainFunctions__item">
+							<a href="#" class="mainFunctions__link">Hauptseite</a>
+						</li>
+						<li class="mainFunctions__item">
+							<a href="#" class="mainFunctions__link">Themenportale</a>
+						</li>
+						<li class="mainFunctions__item">
+							<a href="#" class="mainFunctions__link">Von A bis Z</a>
+						</li>
+						<li class="mainFunctions__item">
+							<a href="#" class="mainFunctions__link">Zufälliger Artikel</a>
+						</li>
+					</ul>
+				</div>
+			</nav><!-- .sideBar -->
+
+			<div class="gi u-w4/5">
+				<f:render section="Content" />
+			</div>
+		</div>
+
+		<script src="{f:uri.resource(path:
+				'resource://PackageFactory.KnowledgeBase/Public/Javascripts/App.min.js')}"></script>
+	</body>
+</html>
