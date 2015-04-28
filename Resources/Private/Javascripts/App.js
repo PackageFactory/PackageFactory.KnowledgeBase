@@ -13,7 +13,6 @@ var
   Parser = new ComponentDomParser({
   dataSelector: 'app',
   componentIndex: {
-    'test' : backboneView(require('./Apps/Test/App'))
   }
 });
 
