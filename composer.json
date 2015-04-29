@@ -4,7 +4,7 @@
     "description": "Add description here",
     "require": {
         "typo3/flow": "3.0.0-beta1",
-        "typo3/typo3cr": "^1.2.5"
+        "typo3/typo3cr": "2.0.x-dev"
     },
     "autoload": {
         "psr-0": {
