@@ -1,167 +1,110 @@
-/*
-Spacing utilities
+/**
+ * Spacing utilities
+ */
 
-Margin and padding helper classes. Use these to tweak layout on a micro level.
+// Spacings mixin
+@mixin spacings-setup($namespace: '') {
+  // Margin Resets
+  .u-m#{$namespace}0 {
+    margin: 0;
+  }
+  .u-ml#{$namespace}0 {
+    margin-left: 0;
+  }
+  .u-mr#{$namespace}0 {
+    margin-right: 0;
+  }
+  .u-mb#{$namespace}0 {
+    margin-bottom: 0;
+  }
+  .u-mt#{$namespace}0 {
+    margin-top: 0;
+  }
 
-Styleguide 2.4
-*/
+  // Padding Resets
+  .u-p#{$namespace}0 {
+    padding: 0;
+  }
+  .u-pl#{$namespace}0 {
+    padding-left: 0;
+  }
+  .u-pr#{$namespace}0 {
+    padding-right: 0;
+  }
+  .u-pb#{$namespace}0 {
+    padding-bottom: 0;
+  }
+  .u-pt#{$namespace}0 {
+    padding-top: 0;
+  }
 
-/*
-Margin utilities
+  // Whole Margins
+  .u-m#{$namespace}1#{\/}1 {
+    margin: rs($basic-spacing, $unit: rem);
+  }
+  .u-ml#{$namespace}1#{\/}1 {
+    margin-left: rs($basic-spacing, $unit: rem);
+  }
+  .u-mr#{$namespace}1#{\/}1 {
+    margin-right: rs($basic-spacing, $unit: rem);
+  }
+  .u-mb#{$namespace}1#{\/}1 {
+    margin-bottom: rs($basic-spacing, $unit: rem);
+  }
+  .u-mt#{$namespace}1#{\/}1 {
+    margin-top: rs($basic-spacing, $unit: rem);
+  }
 
-.u-m0  - Resets the margin.
-.u-mt0 - Resets the top margin.
-.u-mr0 - Resets the right margin.
-.u-ml0 - Resets the left margin.
-.u-mb0 - Resets the bottom margin.
-.u-m   - Adds a basic margin.
-.u-mt  - Adds a basic margin on the top.
-.u-mr  - Adds a basic margin on the right.
-.u-ml  - Adds a basic margin on the left.
-.u-mb  - Adds a basic margin on the bottom.
-.u-m0-5   - Adds a half sized margin.
-.u-mt0-5  - Adds a half sized margin on the top.
-.u-mr0-5  - Adds a half sized margin on the right.
-.u-ml0-5  - Adds a half sized margin on the left.
-.u-mb0-5  - Adds a half sized margin on the bottom.
+  // Whole Paddings
+  .u-p#{$namespace}1#{\/}1 {
+    padding: rs($basic-spacing, $unit: rem);
+  }
+  .u-pl#{$namespace}1#{\/}1 {
+    padding-left: rs($basic-spacing, $unit: rem);
+  }
+  .u-pr#{$namespace}1#{\/}1 {
+    padding-right: rs($basic-spacing, $unit: rem);
+  }
+  .u-pb#{$namespace}1#{\/}1 {
+    padding-bottom: rs($basic-spacing, $unit: rem);
+  }
+  .u-pt#{$namespace}1#{\/}1 {
+    padding-top: rs($basic-spacing, $unit: rem);
+  }
 
-Markup:
-<p class="{$modifiers}">I am an paragraph.</p>
+  // Halve Margins
+  .u-m#{$namespace}1#{\/}2 {
+    margin: rs($half-spacing, $unit: rem);
+  }
+  .u-ml#{$namespace}1#{\/}2 {
+    margin-left: rs($half-spacing, $unit: rem);
+  }
+  .u-mr#{$namespace}1#{\/}2 {
+    margin-right: rs($half-spacing, $unit: rem);
+  }
+  .u-mb#{$namespace}1#{\/}2 {
+    margin-bottom: rs($half-spacing, $unit: rem);
+  }
+  .u-mt#{$namespace}1#{\/}2 {
+    margin-top: rs($half-spacing, $unit: rem);
+  }
 
-Styleguide 2.4.1
-*/
-// Resets
-%u-m0,
-.u-m0 { margin: 0; }
-%u-mt0,
-.u-mt0 { margin-top: 0; }
-%u-mr0,
-.u-mr0 { margin-right: 0; }
-%u-ml0,
-.u-ml0 { margin-left: 0; }
-%u-mb0,
-.u-mb0 { margin-bottom: 0; }
-
-// Basic
-%u-m,
-.u-m {
-  @include rem(margin, $basic-spacing);
-}
-%u-mt,
-.u-mt {
-  @include rem(margin-top, $basic-spacing);
-}
-%u-mr,
-.u-mr {
-  @include rem(margin-right, $basic-spacing);
-}
-%u-ml,
-.u-ml {
-  @include rem(margin-left, $basic-spacing);
-}
-%u-mb,
-.u-mb {
-  @include rem(margin-bottom, $basic-spacing);
-}
-
-// Half
-%u-m0-5,
-.u-m0-5 {
-  @include rem(margin, $half-spacing);
-}
-%u-mt0-5,
-.u-mt0-5 {
-  @include rem(margin-top, $half-spacing);
-}
-%u-mr0-5,
-.u-mr0-5 {
-  @include rem(margin-right, $half-spacing);
-}
-%u-ml0-5,
-.u-ml0-5 {
-  @include rem(margin-left, $half-spacing);
-}
-%u-mb0-5,
-.u-mb0-5 {
-  @include rem(margin-bottom, $half-spacing);
-}
-
-/*
-Padding utilities
-
-.u-p0  - Resets the padding.
-.u-pt0 - Resets the top padding.
-.u-pr0 - Resets the right padding.
-.u-pl0 - Resets the left padding.
-.u-pb0 - Resets the bottom padding.
-.u-p   - Adds a basic padding.
-.u-pt  - Adds a basic padding on the top.
-.u-pr  - Adds a basic padding on the right.
-.u-pl  - Adds a basic padding on the left.
-.u-pb  - Adds a basic padding on the bottom.
-.u-p0-5   - Adds a half sized padding.
-.u-pt0-5  - Adds a half sized padding on the top.
-.u-pr0-5  - Adds a half sized padding on the right.
-.u-pl0-5  - Adds a half sized padding on the left.
-.u-pb0-5  - Adds a half sized padding on the bottom.
-
-Markup:
-<p class="{$modifiers}">I am an paragraph.</p>
-
-Styleguide 2.4.2
-*/
-// Resets
-%u-p0,
-.u-p0 { padding: 0; }
-%u-pt0,
-.u-pt0 { padding-top: 0; }
-%u-pr0,
-.u-pr0 { padding-right: 0; }
-%u-pl0,
-.u-pl0 { padding-left: 0; }
-%u-pb0,
-.u-pb0 { padding-bottom: 0; }
-
-// Basic
-%u-p,
-.u-p {
-  @include rem(padding, $basic-spacing);
-}
-%u-pt,
-.u-pt {
-  @include rem(padding-top, $basic-spacing);
-}
-%u-pr,
-.u-pr {
-  @include rem(padding-right, $basic-spacing);
-}
-%u-pl,
-.u-pl {
-  @include rem(padding-left, $basic-spacing);
-}
-%u-pb,
-.u-pb {
-  @include rem(padding-bottom, $basic-spacing);
+  // Halve Paddings
+  .u-p#{$namespace}1#{\/}2 {
+    padding: rs($half-spacing, $unit: rem);
+  }
+  .u-pl#{$namespace}1#{\/}2 {
+    padding-left: rs($half-spacing, $unit: rem);
+  }
+  .u-pr#{$namespace}1#{\/}2 {
+    padding-right: rs($half-spacing, $unit: rem);
+  }
+  .u-pb#{$namespace}1#{\/}2 {
+    padding-bottom: rs($half-spacing, $unit: rem);
+  }
+  .u-pt#{$namespace}1#{\/}2 {
+    padding-top: rs($half-spacing, $unit: rem);
+  }
 }
 
-// Half
-%u-p0-5,
-.u-p0-5 {
-  @include rem(padding, $half-spacing);
-}
-%u-pt0-5,
-.u-pt0-5 {
-  @include rem(padding-top, $half-spacing);
-}
-%u-pr0-5,
-.u-pr0-5 {
-  @include rem(padding-right, $half-spacing);
-}
-%u-pl0-5,
-.u-pl0-5 {
-  @include rem(padding-left, $half-spacing);
-}
-%u-pb0-5,
-.u-pb0-5 {
-  @include rem(padding-bottom, $half-spacing);
-}
+@include spacings-setup();

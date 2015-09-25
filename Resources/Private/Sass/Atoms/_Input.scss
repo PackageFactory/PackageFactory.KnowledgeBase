@@ -1,67 +1,97 @@
-/*
-Form input elements
+/**
+ * Form inputs
+ */
 
-Basic styling for form inputs.
-
-Styleguide 3.7
-*/
-
-
-/*
-Text inputs
-
-.textInput         - Basic styling for text input elements.
-.textInput:hover   - Hover styling for basic text input elements.
-.textInput:focus   - Focused styling for basic text input elements.
-
-Markup:
-<input type="text" class="{$modifiers}" /><br>
-<textarea class="{$modifiers}" cols="40"></textarea>
-
-Styleguide 3.7.1
-*/
-%textInput,
-.textInput {
-	height: map-get($textInput, height);
-	padding: .2em .4em;
-	@include rem(margin-bottom, map-get($textInput, bottomSpacing));
-
-	background: $content-background;
-	border: map-get($textInput, border);
-	border-radius: map-get($textInput, borderRadius);
-	box-shadow: map-get($textInput, boxShadow);
-
-	@include font-size(map-get($textInput, fontSize));
-	color: map-get($textInput, textColor);
-}
+ /*
+ * Base styling for form input fields.
+ */
 textarea {
-	height: auto; /* Reset height since textareas have the attribute rows="" */
-	min-height: ($base-line-height *3) +px; /* Set a min-height for textareas of 3 rows */
+  // Resets the height since textareas have the rows="" attribute.
+  height: auto;
 
-	resize: vertical; /* So users cannot expand the textarea over it's boundaries */
-	overflow: auto; /* Removes default vertical scrollbar in IE6/7/8/9. */
-	vertical-align: top; /* Improves readability and alignment in all browsers. */
+  // Sets a min-height for textareas of 3 rows.
+  min-height: ($base-line-height *3) +px;
+
+  // Prevent expanding the textarea over it's horizontal boundaries.
+  resize: vertical;
+
+  // Removes default vertical scrollbar in IE6/7/8/9.
+  overflow: auto;
+
+  // Improves readability and alignment in all browsers.
+  vertical-align: top;
 }
 
-input::-webkit-datetime-edit {
-	/**
-	 * A possible shadow-dom fix for webkit control spacing on input[type=time]
-	 */
-	margin-top: -.17em;
-	margin-bottom: -.17em;
+input {
+  // A possible shadow-dom fix for webkit control spacing on input[type="time"].
+  &::-webkit-datetime-edit {
+    margin-top: -.17em;
+    margin-bottom: -.17em;
+  }
+
+  // Base styling for checkboxes and radio buttons.
+  &[type="checkbox"],
+  &[type="radio"] {
+    margin-right: .35em;
+    cursor: pointer;
+  }
+}
+
+// Fix the font-settings for input placeholders since they wont get inherited from parent elements e.g. <body>.
+input, textarea {
+  @include placeholder() {
+    font: $base-font-weight #{$base-font-size/16*100}%/#{$base-line-height/$base-font-size} $base-font-family;
+  }
 }
 
 /*
-Checkboxes / Radio buttons
+ * The base class for all textInputs.
+ */
+@mixin textInput() {
+  height: $base-line-height*1.5 + px;
+  padding: .2em .5em;
 
-Markup:
-<label><input type="checkbox" /> I am an checkbox</label>
-<label><input type="radio" /> I am an radio button</label>
+  background: $content-background;
+  border: 1px $basic-border-style $basic-border-color;
+  border-radius: $brand-border-radius;
+  box-shadow: inset 0 1px 1px rgba($basic-border-color, 0.4);
 
-Styleguide 3.7.2
-*/
-input[type="checkbox"],
-input[type="radio"] {
-	margin-right: .35em;
-	cursor: pointer;
+  font-size: rs(14, $unit: rem);
+  color: lighten($base-text-color, 5%);
+}
+
+.textInput {
+  @include textInput();
+}
+
+/*
+ * Disabled state for inputs.
+ */
+@mixin textInput--disabled() {
+  opacity: .5;
+  pointer-events: none;
+}
+.textInput[disabled],
+.textInput--disabled {
+  @include textInput--disabled();
+}
+
+/*
+ * Positive validated state for inputs.
+ */
+@mixin textInput--success() {
+  border-color: $color-positive;
+}
+.textInput--success {
+  @include textInput--success();
+}
+
+/*
+ * Negative validated state for inputs.
+ */
+@mixin textInput--failure() {
+  border-color: $color-negative;
+}
+.textInput--failure {
+  @include textInput--failure();
 }

@@ -1,83 +1,27 @@
-/**
- * Config
- * @description Configure grunt tasks & options.
- */
+module.exports = {
+    // Empty tasks array which will be filled with the aviable taskNames on each gulp run.
+    'tasks': [],
 
-var Config = function() {
-	'use strict';
+    // Project related settings, switching the 'isInLiveMode' bool to true, minifies the assets on each build/compile task run.
+    'project': {
+        'isInLiveMode': false,
+        'browserSupport': ['last 2 versions', 'ie 9']
+    },
 
-	/*
-	 * Project settings.
-	 */
-	this.project = {
-		browserSupport: ['last 2 version', 'ie 8', 'ie 9'],
-		fileBanner: function(description) { // Banner comment for compressed files.
-			var banner;
+    // Configuration for https://github.com/doctyper/gulp-modernizr
+    'modernizr': {
+        'fileName': 'Modernizr.js',
+        'destPath': 'Web/Modernizr/',
+        'config': {
 
-			// Add a delimiter between the description(if one was passed) and the build date.
-			description = (description) ? description + ' - ' : '';
-
-			banner = '/*!\n' +
-			         '* ' + description + 'Built on: <%= grunt.template.today("yyyy-mm-dd") %> \n' +
-			         '* \n' +
-			         '* @package ' + this.package.name + '\n' +
-			         '* @author ' + this.package.author.name + ' <' +  this.package.author.email + '>' + '\n' +
-			         '*/\n';
-
-			return banner;
-		}.bind(this)
-	};
-
-
-	/*
-	 * Meta data
-	 */
-	this.package = require('../package'); // Contents of the package.json.
-
-
-	/*
-	 * Paths
-	 */
-	this.paths = {
-		private: 'Resources/Private',
-		public: 'Resources/Public',
-		docs: 'Documentation'
-	};
-
-
-	/*
-	 * Stylesheets
-	 */
-	this.Sass = {
-		paths: {
-			devDir: this.paths.private + '/Sass',
-			distDir: this.paths.public + '/Stylesheets'
-		}
-	};
-
-
-	/*
-	 * Javascript
-	 */
-	this.JavaScripts = {
-		paths: {
-			devDir: this.paths.private + '/Javascripts',
-			distDir: this.paths.public + '/Javascripts'
-		},
-		externals: []
-	};
-
-
-	/*
-	 * Images
-	 */
-	this.Images = {
-		optimizationLevel : 5,
-		paths: {
-			tempDir: this.paths.public + '/tempImagesDir',
-			distDir: this.paths.public + '/Images'
-		}
-	};
+            // Based on default settings of http://modernizr.com/download/
+            'options': [
+                'setClasses',
+                'addTest',
+                'html5printshiv',
+                'testProp',
+                'fnBind'
+            ]
+        }
+    }
 };
-
-module.exports = new Config();

@@ -1,77 +1,77 @@
-/*
-Heading elements
-
-Basic styling for headings and sub-headings.
-
-Styleguide 3.1
-*/
-
+/**
+ * Headings
+ */
 
 /*
-Headings
+ * The base class for all headings.
+ */
+@mixin h() {
+  margin-top: 0;
+  margin-bottom: .3em;
+  font-weight: $thin;
 
-Markup:
-<h1>I am an first-level heading</h1>
-<h2>I am an second-level heading</h2>
-<h3>I am an third-level heading</h3>
-<h4>I am an fourth-level heading</h4>
-<h5>I am an fifth-level heading</h5>
-<h6>I am an sixth-level heading</h6>
-
-Styleguide 3.1.1
-*/
-.h,
-%h {
-	font-weight: $bold;
-
-	/**
-	 * Optimized kerning for large font sizes
-	 * use this only on large font-sizes (f.e. headings) to avoid performance issues.
-	 */
-	text-rendering: optimizeLegibility;
+  // Optimized kerning for large font sizes.
+  // Use this only on large font-sizes (f.e. headings) to avoid performance issues.
+  text-rendering: optimizeLegibility;
+}
+.h, %h {
+  @include h();
 }
 
 /*
-Heading modifiers
+ * Heading modifiers
+ * Styles the heading without changing it's importance for SEO robots etc.
+ */
+@mixin h1() {
+  font-size: 40px;
 
-.h1 - Style the `<h#>`-element like a standard `<h1>`-element.
-.h2 - Style the `<h#>`-element like a standard `<h2>`-element.
-.h3 - Style the `<h#>`-element like a standard `<h3>`-element.
-.h4 - Style the `<h#>`-element like a standard `<h4>`-element.
-.h5 - Style the `<h#>`-element like a standard `<h5>`-element.
-.h6 - Style the `<h#>`-element like a standard `<h6>`-element.
+  @extend %h;
+}
+@mixin h2() {
+  font-size: 30px;
 
-Markup:
-<h1 class="{$modifiers}">I am an first-level heading</h1>
-<h2 class="{$modifiers}">I am an second-level heading</h2>
-<h3 class="{$modifiers}">I am an third-level heading</h3>
-<h4 class="{$modifiers}">I am an fourth-level heading</h4>
-<h5 class="{$modifiers}">I am an fifth-level heading</h5>
-<h6 class="{$modifiers}">I am an sixth-level heading</h6>
+  @extend %h;
+}
+@mixin h3() {
+  font-size: 24px;
 
-Styleguide 3.1.2
-*/
-.h1, %h1 {
-	@extend %h;
-	font-size: 36px;
+  @extend %h;
 }
-.h2, %h2 {
-	@extend %h;
-	font-size: 30px;
+@mixin h4() {
+  font-size: 20px;
+  font-weight: 200;
+
+  @extend %h;
 }
-.h3, %h3 {
-	@extend %h;
-	font-size: 24px;
+@mixin h5() {
+  font-size: 16px;
+  font-weight: $regular;
+
+  @extend %h;
 }
-.h4, %h4 {
-	@extend %h;
-	font-size: 20px;
+@mixin h6() {
+  font-size: 14px;
+  font-weight: $regular;
+  text-transform: uppercase;
+
+  @extend %h;
 }
-.h5, %h5 {
-	@extend %h;
-	font-size: 16px;
+
+h1, .h1 {
+  @include h1();
 }
-.h6, %h6 {
-	@extend %h;
-	font-size: 16px;
+h2, .h2 {
+  @include h2();
+}
+h3, .h3 {
+  @include h3();
+}
+h4, .h4 {
+  @include h4();
+}
+h5, .h5 {
+  @include h5();
+}
+h6, .h6 {
+  @include h6();
 }

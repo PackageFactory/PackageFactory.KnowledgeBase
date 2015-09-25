@@ -1,63 +1,115 @@
-/*
-Buttons
-
-Styleguide 3.8
+/**
+ * Buttons
 */
+
 /*
-Button Object
+ * The base class for all buttons.
+ */
+@mixin btn() {
+  display: inline-block;
 
-Disguise something as a button.
+  // Set in em's so we can change the size of the button depending on the font-size.
+  padding: .8em 1.5em;
+  border: 1px solid currentColor;
+  background: 0;
+  border-radius: $brand-border-radius;
+  cursor: pointer;
 
-.btn           - The basic button styles for all .btn's.
-.btn:hover     - Standard hover styling for buttons.
-.btn.btn--full - Set the button width to the width of it's parent element.
+  font-size: .8em;
 
-Markup:
-<button class="{$modifiers}">Send button</button>
-<input type="button" class="{$modifiers}" value="Button" />
-<input type="reset" class="{$modifiers}" value="Reset" />
-<input type="submit" class="{$modifiers}" value="Submit" />
-<a class="{$modifiers}">An anchor element.</a>
+  // Normalize some rules across the targeted elements (<input>, <button> and the .btn class).
+  font-weight: normal;
+  line-height: 1;
+  color: $btn-color;
+  vertical-align: top;
+  transition: all $transition-duration ease;
 
-Styleguide 3.8.1
-*/
-%btn,
+  &,
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:hover {
+    background: $btn-color;
+    border-color: $btn-color;
+    color: color-adjust($btn-color, 100%);
+  }
+}
 .btn {
-	display: inline-block;
-	@include rem(margin-bottom, map-get($button, bottomSpacing));
-	/**
-	 * Set in em's so we can change the size of the button depending on the font-size.
-	 */
-	padding: map-get($button, innerPadding);
-	border: 0;
-
-	background: map-get($button, background);
-	border-radius: $brand-border-radius;
-	cursor: pointer;
-
-	font-size: map-get($button, fontSize);
-	/**
-	 * Normalize some rules accross the targeted elements (<input>, <button> and the .btn class).
-	 */
-	font-weight: normal;
-	line-height: 1;
-	color: map-get($button, textColor);
-	vertical-align: top;
-
-	&,
-	&:hover {
-		text-decoration: none;
-	}
+  @include btn();
 }
 
-%btn--full,
+/*
+ * Set the button width to the width of it's parent element.
+ */
+@mixin btn--full() {
+  display: block;
+  text-align: center;
+
+  // The following is so that this class works properly on inputs as well as anchor tags.
+  padding-right: 0;
+  padding-left: 0;
+  width: 100%;
+}
 .btn--full {
-	display: block;
-	text-align: center;
-	/**
-	 * The following is so that this class works properly on inputs as well as anchor tags.
-	 */
-	padding-right: 0;
-	padding-left: 0;
-	width: 100%;
+  @include btn--full();
+}
+
+/*
+ * Set the button width to the width of it's parent element.
+ */
+@mixin btn--invert() {
+  color: color-adjust($base-text-color, 100%);
+
+  &:hover {
+    background: color-adjust($base-text-color, 100%);
+    border-color: color-adjust($base-text-color, 100%);
+    color: $btn-color;
+  }
+}
+.btn--invert {
+  @include btn--invert();
+}
+
+/*
+ * Visualize the disabled state of the button.
+ */
+@mixin btn--disabled() {
+  color: $base-text-color;
+  pointer-events: none;
+  opacity: .5;
+}
+.btn--disabled,
+.btn[disabled] {
+  @include btn--disabled();
+}
+
+/*
+ * Visualize the positive purpose/action of the button.
+ */
+@mixin btn--positive() {
+  color: $color-positive;
+
+  &:hover {
+    background: $color-positive;
+    border-color: $color-positive;
+  }
+}
+.btn--positive {
+  @include btn--positive();
+}
+
+/*
+ * Visualize the negative purpose/action of the button.
+ */
+@mixin btn--negative() {
+  color: $color-negative;
+
+  &:hover {
+    background: $color-negative;
+    border-color: $color-negative;
+  }
+}
+.btn--negative {
+  @include btn--negative();
 }

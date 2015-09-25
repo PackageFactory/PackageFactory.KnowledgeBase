@@ -1,37 +1,26 @@
+/**
+ * Grids
+ */
+
+$grid-gutter: $column-gutter / 2;
+
 /*
-Grids
-
-Styleguide 4.1
-*/
-
-/*
-Grid Object
-
-Grid object which makes use of the generated width classes.
-
-Markup:
-<div class="g">
-	<div class="gi u-w1/3">first collumn</div>
-	<div class="gi u-w1/3">second collumn</div>
-	<div class="gi u-w1/3">third collumn</div>
-</div>
-
-Styleguide 4.1.1
-*/
-$grid-direction:  $start;
-
-%grid,
+ * Grid object which is based on the util width classes.
+ */
 .g,
 .grid {
-	@extend .u-cf;
-	margin-left: -($column-gutter / 2);
-	margin-right: -($column-gutter / 2);
+  margin-left: -#{$grid-gutter};
+  margin-right: -#{$grid-gutter};
+
+  @include u-cf();
 }
-%grid__item,
+
+/*
+ * Grid item, floats itself into the grid and depends on the u-w#/# util classes.
+ */
 .gi,
 .grid__item {
-	// Base styles for .gi--# classes
-	float: $grid-direction;
-	padding-left: ($column-gutter / 2);
-	padding-right: ($column-gutter / 2);
+  float: $start;
+  padding-left: $grid-gutter;
+  padding-right: $grid-gutter;
 }

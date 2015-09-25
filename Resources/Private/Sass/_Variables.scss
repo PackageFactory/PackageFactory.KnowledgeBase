@@ -1,137 +1,144 @@
-//
-// Variables, variables, variables!
-//
-// @package #{ext_directory()}
-// @path /_Variables.sass
-// @link http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#variables_
-//
-
-
 // =============================================================================
 // Project settings
 // =============================================================================
 // Reading direction of this project, if set to 'rtl' - texts, labels
 // and the grid will be aligned to the right side of the document.
-$direction:             ltr;
+$direction: ltr !default;
 
+// Base directory for all images.
+$image-base-path: '../Images/' !default;
 
 // =============================================================================
 // Brand related variables
 // =============================================================================
-// Your brand colors, for each of these keys, a class text-color helper-class will be generated.
+// All brand colors, for each of these keys, a utility color-class will be generated.
 // f.e. `.u-brandColor-primary { color: #0097d7; }`
 $brand-colors: (
-	primary: #0097d7,
-	background: #ffffff
-);
+        primary: #0097d7
+)  !default;
 
-// Your main brand font-family
-$brand-font-family:     "Helvetica Neue", Helvetica, Arial, sans-serif;
+// The main brand font-family
+$brand-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
 
-// If your layout makes use of rounded corners, you can specify an general border-radius
-// here to have a consistent setting.
-$brand-border-radius:   1px;
+// If the CD makes use of rounded corners, use this variable for consistency.
+$brand-border-radius: 2px !default;
 
 // If you want to use the image-replacement technique for your brand logo,
 // set the 'image' key to the image-name of your brand logo e.g.:
 // $brand-logo: (image: 'logo.png', width: 200px, height: 200px);
 //
 // Be aware that you need to specify the dimensions of your logo, otherwise it won't be displayed.
-$brand-logo: (
-  image: 'brandLogo.png',
-  width: 200px,
-  height: 200px
-);
-
+$brand-logos: (
+        default: (
+                image: 'BrandLogo.svg',
+                width: 200px,
+                height: 100px
+        )
+) !default;
 
 // =============================================================================
 // Base Typesetting
 // =============================================================================
-// Font-family stack variables to standardize the font-setting
-$sans-font-family:      "Helvetica Neue", Helvetica, Arial, sans-serif;
-$serif-font-family:     Georgia, "Times New Roman", Times, serif;
-$mono-font-family:      Menlo, Monaco, Consolas, "Courier New", monospace; // Will be set on elements like <code> etc.
+// The webfont font-family stack of the project. Each Sass-Map represents a different font-family with it's unique style and weight.
+// F.e.
+// $webFonts:
+// (group: 'ff-din', id: 'condensed-light', font: ('FF-Din W01 Condensed Light', san-serif ), weight: 200, style: normal),
+// (group: 'ff-din', id: 'light-italic', font: ('FF-Din W01 Light Italic', san-serif ), weight: 200, style: italic);
+// After defining your font-stack, you can access your webfonts via the 'webFont' @mixin.
+$webFonts: false;
 
-// The font-weights below are used to handle webfonts and consistent stylings.
-$bold:                  700;
-$regular:               400;
-$light:                 300;
+// Font-family stack variables to standardize the font-setting
+$sans-font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif !default;
+$serif-font-family: Georgia, 'Times New Roman', Times, serif !default;
+$mono-font-family: Menlo, Monaco, Consolas, 'Courier New', monospace !default;
+
+// The font-weights below are used to emphasize written words instead of numbers in your Sass.
+$bold: 700 !default;
+$regular: 400 !default;
+$light: 300 !default;
+$thin: 100 !default;
 
 // Base font settings which will be set on the '<body>' element,
 // '$base-font-size' and '$base-line-height' are pixel values.
-$base-font-size:        16;
-$base-line-height:      24;
-$base-font-family:      $sans-font-family;
-$base-font-weight:      $regular;
-$base-text-color:       #3C474B;
+$base-font-size: 16 !default;
+$base-line-height: 24 !default;
+$base-font-family: $sans-font-family !default;
+$base-font-weight: $regular !default;
+$base-text-color: #51585e !default;
 
 // Typographic spacings (in pixels), these default values will
 // output a basic vertical rythm based on your '$base-line-height'.
-$basic-spacing:         $base-line-height;
-$half-spacing:          $basic-spacing / 2;
-
+$basic-spacing: $base-line-height !default;
+$half-spacing: $basic-spacing / 2 !default;
 
 // =============================================================================
 // Layout
 // =============================================================================
 // Basic layout width (in pixels) - will be set on the '.siteWrapper' class
 // The value is wrapped in the relative-size function which converts pixels into em's.
-$layout-width:          rs(1240);
+$layout-width: 80% !default;
+$layout-max-width: rs(1200) !default;
 
-// Is this layout centered? If set to 'true' the '.siteWrapper' class will be centered.
-$centered-layout:       true;
+// If this boolean is set to 'true' the '.siteWrapper' class will be horizontally centered.
+$centered-layout: true !default;
 
 // Inner spacing for all grid-items.
-$column-gutter:         20px;
+$column-gutter: 20px !default;
 
-// The background which will be set on the <body> element, you can also pass in
-// other arguments e.g.:
-// $body-background: image-url('body-bg.gif') top left repeat-x #fff;
-$body-background:       #fff;
+// The background which will be set on the <body> element.
+$body-background: #fff !default;
 
 // Used to generate some colors, this doesn't have any direct effect on
 // the .siteContent container or it's background.
-$content-background:    #fff;
+$content-background: #fff !default;
 
-// default units for media-query mixins - it must include a digit e.g.:
+// Z-Index Masterlist, describe your z-index'es here, and use the z() function in your Sass files.
+// F.e: z-index: z('myElement');
+$zIndexes: (
+        // myElement: 1000
+) !default;
+
+// =============================================================================
+// Responsive related variables
+// =============================================================================
+// Switching this boolean to 'false' will result in fewer width classes,
+// generated from the following Sass-Map.
+$is-responsive: true !default;
+
+// Breakpoints, each breakpoint is accessible via the mq('myKey') @mixin
+// and will output the written rules inside a media-query declaration.
+$mq-breakpoints: (
+        medium: (
+                query: 'screen and (min-width: 600px)',
+                classNameShorthand: 'm'
+        ),
+        large: (
+                query: 'screen and (min-width: 1200px)',
+                classNameShorthand: 'l'
+        )
+) !default;
+
+// Default unit for media-query mixins(min-screen(), max-screen(), screen()) - it must include a digit e.g.:
 // $mq-unit: 1em; or $mq-unit: 1px;
-$mq-unit:               1px;
-
+$mq-unit: 1px !default;
 
 // =============================================================================
 // Design related variables
 // =============================================================================
+// Transition duration.
+$transition-duration: .3s;
+
 // Default color for all anchors and links.
-$link-color:            map-get($brand-colors, primary);
+$link-color: map-get($brand-colors, primary) !default;
+
+// Default color for all buttons.
+$btn-color: map-get($brand-colors, primary) !default;
+
+// Mood and action colors used on buttons, alerts and other actions.
+$color-info: map-get($brand-colors, primary) !default;
+$color-positive: #8CD700 !default;
+$color-negative: #D75200 !default;
 
 // Default styling for horizontal rules and bordered elements like tables.
-$basic-border-color:    color-adjust($content-background, 20%);
-$basic-border-style:    solid;
-
-
-// =============================================================================
-// Forms
-// =============================================================================
-// The height of the element itself.
-$textInput: (
-	height:               $base-line-height +px,
-	bottomSpacing:        $half-spacing,
-	border:               1px solid $basic-border-color,
-	borderRadius:         $brand-border-radius,
-	boxShadow:            inset 0 1px 1px rgba(#000, 0.075),
-	fontSize:             14,
-	textColor:            lighten($base-text-color, 5%)
-);
-
-
-// =============================================================================
-// Buttons
-// =============================================================================
-// The basic bottom-margin on all text-inputs.
-$button: (
-	bottomSpacing:        $half-spacing,
-	innerPadding:         .5em .75em, // Set in em's so we can change the size of the button depending on the font-size.
-	fontSize:             .8em,
-	background:           map-get($brand-colors, primary),
-	textColor:            color-adjust(map-get($brand-colors, primary), 100%)
-);
+$basic-border-color: color-adjust($content-background, 10%) !default;
+$basic-border-style: solid !default;
